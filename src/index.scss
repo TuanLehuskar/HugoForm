@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700&display=swap");
+
+$font-family-sans-serif: "Lexend", system-ui, -apple-system, "Segoe UI", Roboto,
+  "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$yellow: #e8935f;
+$yellow-light: #f9e6ac;
+$blue: #58a1f3;
+$blue-light: #aed1f9;
+$red: #f3596d;
+$red-light: #f9acb6;
+$purple: #c259f3;
+$purple-light: #e1acf9;
+
+$enable-shadows: false;
+$link-color: $yellow;
+
+$input-bg: transparent;
+$input-color: $yellow;
+$input-border-radius: 0;
+$input-border-radius-sm: 0;
+$input-border-radius-lg: 0;
+$input-focus-box-shadow: unset;
+$input-focus-border-color: unset;
+$input-placeholder-color: rgba(249, 230, 172, 0.7);
+$input-border-color: rgba(249, 230, 172, 0.7);
+
+$form-check-input-border: 1px solid $yellow-light;
+$form-check-input-checked-color: black;
+$form-check-input-checked-bg-color: $yellow;
+
+$btn-disabled-bg-shade-amount: 40%;
+$btn-disabled-bg-tint-amount: 40%;
+
+$pagination-bg: transparent;
+$pagination-focus-bg: transparent;
+$pagination-hover-bg: transparent;
+$pagination-active-bg: transparent;
+$pagination-disabled-bg: transparent;
+$pagination-border-color: transparent;
+$pagination-hover-border-color: $yellow;
+$pagination-active-border-color: transparent;
+$pagination-disabled-border-color: transparent;
+$pagination-focus-box-shadow: unset;
+
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+
+$btn-font-weight: $font-weight-semibold;
+
+$theme-colors: (
+  "yellow": $yellow,
+  "yellow-light": $yellow-light,
+  "blue": $blue,
+  "blue-light": $blue-light,
+  "red": $red,
+  "red-light": $red-light,
+  "purple": $purple,
+  "purple-light": $purple-light,
+);
+
+@import "bootstrap/scss/bootstrap-utilities";
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "color":
+      map-merge(
+        map-get($utilities, "color"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "color"), "values"),
+              (
+                "yellow-light": tint-color($yellow, 50%),
+                "transparent": transparent,
+              )
+            ),
+        )
+      ),
+  )
+);
+
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant(
+      $value,
+      $value,
+      $hover-background: shade-color($value, $btn-hover-bg-shade-amount),
+      $hover-border: shade-color($value, $btn-hover-border-shade-amount),
+      $active-background: shade-color($value, $btn-active-bg-shade-amount),
+      $active-border: shade-color($value, $btn-active-border-shade-amount),
+      $disabled-background: shade-color($value, $btn-disabled-bg-shade-amount),
+      $disabled-border: shade-color($value, $btn-disabled-bg-shade-amount)
+    );
+  }
+}
+
+._cursor-pointer {
+  cursor: pointer;
+}
+
+@each $color, $value in $theme-colors {
+  ._choice-#{$color} {
+    transition: $btn-transition !important;
+    background-color: rgba($value, 5%) !important;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba($value, 10%) !important;
+    }
+
+    &.active {
+      background-color: rgba($value, 35%) !important;
+    }
+  }
+
+  ._bg-stars-top-#{$color} {
+    background-image: radial-gradient(
+        white,
+        rgba($value, 20%) 2px,
+        transparent 40px
+      ),
+      radial-gradient(white, rgba($value, 15%) 1px, transparent 30px),
+      radial-gradient(white, rgba($value, 10%) 2px, transparent 80px),
+      radial-gradient(white, rgba($value, 6%) 1px, transparent 30px),
+      radial-gradient(white, rgba($value, 12%) 1px, transparent 40px),
+      linear-gradient(to top, rgba($value, 80%) 20%, transparent 80%);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px,
+      320px 320px, 100% 100%;
+    background-position: 0 0, 40px 60px, 214px 270px, 100px 100px, 120px 200px,
+      0 0;
+  }
+
+  ._bg-stars-bottom-#{$color} {
+    background-image: radial-gradient(
+        white,
+        rgba($value, 20%) 2px,
+        transparent 40px
+      ),
+      radial-gradient(white, rgba($value, 15%) 1px, transparent 30px),
+      radial-gradient(white, rgba($value, 10%) 2px, transparent 80px),
+      radial-gradient(white, rgba($value, 6%) 1px, transparent 30px),
+      radial-gradient(white, rgba($value, 12%) 1px, transparent 40px),
+      linear-gradient(to bottom, rgba($value, 80%) 20%, transparent 80%);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px,
+      320px 320px, 100% 100%;
+    background-position: 0 0, 120px 60px, 40px 270px, 200px 100px, 80px 200px,
+      0 0;
+  }
+}
+
+._bg-stars {
+  transition: 1s linear all;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $gray-900;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $yellow;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $yellow-light;
+}
